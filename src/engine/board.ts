@@ -7,8 +7,8 @@ export default class Board {
     private readonly board: (Piece | undefined)[][];
     private currentPlayer: Player;
 
-    constructor() {
-        this.currentPlayer = Player.WHITE;
+    constructor(currentPlayer?: Player) {
+        this.currentPlayer = currentPlayer ? currentPlayer : Player.WHITE;
         this.board = this.createBoard();
     }
 
