@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="22e684a4-db6d-4dae-aafd-e43c92b20a0c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/board.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/board.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/bishop.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/bishop.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/king.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/king.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/knight.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/knight.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/pawn.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/pawn.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/piece.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/piece.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/queen.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/queen.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/pieces/rook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/pieces/rook.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28NTzWKPMKXJocf3i1EolNNMCvx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/clahur/Work/Training/chessington-ts",
+    "nodejs.mocha.mocha_node_package_dir": "C:/Users/clahur/Work/Training/chessington-ts/node_modules/mocha",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\clahur\\Work\\Training\\chessington-ts\\node_modules\\typescript\\lib"
+  }
+}]]></component>
+  <component name="RunManager" selected="Mocha.Board">
+    <configuration name="Board" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options>--require ts-node/register</extra-mocha-options>
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/tests/engine/board.spec.ts</test-file>
+      <test-names>
+        <name value="Board" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Mocha.Board" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="22e684a4-db6d-4dae-aafd-e43c92b20a0c" name="Changes" comment="" />
+      <created>1651056305874</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651056305874</updated>
+      <workItem from="1651056307278" duration="15295000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
