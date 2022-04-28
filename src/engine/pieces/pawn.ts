@@ -18,19 +18,21 @@ export default class Pawn extends Piece {
 
 
 function addPawnMoves(player: Player, board: Board, status: PieceStatus) {
-    const direction = player === Player.WHITE ? 1 : -1;
-    let possibleChangeInRows = 1;
-    let emptyNextRow = board.isEmpty(Square.at(status.currentRow + 1*direction, status.currentCol));
-    let emptyNextTwoRows = board.isEmpty(Square.at(status.currentRow + 2*direction, status.currentCol));
-    if (pawnInFirstPosition(status, player) && emptyNextRow && emptyNextTwoRows) {
+    if (!pawnAtEndOfBoard(status, player)) {
+        const direction = player === Player.WHITE ? 1 : -1;
+        let possibleChangeInRows = 1;
+        let emptyNextRow = board.isEmpty(status.currentRow + 1 * direction, status.currentCol);
+        let emptyNextTwoRows = board.isEmpty(status.currentRow + 2 * direction, status.currentCol);
+        if (pawnInFirstPosition(status, player) && emptyNextRow && emptyNextTwoRows) {
             possibleChangeInRows = 2;
-    }
-    if(emptyNextRow) {
-        for (let i = 1; i < possibleChangeInRows + 1; i++) {
-            let rowIndex = status.currentRow + i * direction;
-            let colIndex = status.currentCol;
-            if (board.isEmpty(Square.at(status.currentRow + 1, colIndex))) {
-                status.addSquareToMoveList(status.currentRow + i * direction, status.currentCol);
+        }
+        if (emptyNextRow) {
+            for (let i = 1; i < possibleChangeInRows + 1; i++) {
+                let rowIndex = status.currentRow + i * direction;
+                let colIndex = status.currentCol;
+                if (board.squareIsEmpty(Square.at(status.currentRow + 1, colIndex))) {
+                    status.addSquareToMoveList(status.currentRow + i * direction, status.currentCol);
+                }
             }
         }
     }
@@ -39,3 +41,8 @@ function addPawnMoves(player: Player, board: Board, status: PieceStatus) {
 function pawnInFirstPosition(status: PieceStatus, player: Player) : boolean {
     return status.currentRow === 1 && player === Player.WHITE || status.currentRow === GameSettings.BOARD_SIZE - 2 && player === Player.BLACK;
 }
+
+function pawnAtEndOfBoard(status: PieceStatus, player: Player) : boolean {
+    return status.currentRow === GameSettings.BOARD_SIZE - 1 && player === Player.WHITE || status.currentRow === 0 && player === Player.BLACK;
+}
+

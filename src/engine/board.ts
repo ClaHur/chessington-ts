@@ -28,8 +28,50 @@ export default class Board {
         return this.board[square.row][square.col];
     }
 
-    isEmpty(square: Square) {
+    squareIsEmpty(square: Square) {
         return typeof this.getPiece(square) === "undefined";
+    }
+
+    isEmpty(row: number, col: number) {
+        return this.squareIsEmpty(Square.at(row, col));
+    }
+
+    squareContainsFriend(square: Square) {
+        const piece = this.getPiece(square);
+        if (!(typeof piece === "undefined")) {
+                return piece.player === this.currentPlayer;
+            }
+        return false;
+    }
+
+    containsFriend(row: number, col: number) {
+        return this.squareContainsFriend(Square.at(row, col));
+    }
+
+    squareContainsFoe(square: Square) {
+        const piece = this.getPiece(square);
+        if (!(typeof piece === "undefined")) {
+            return piece.player !== this.currentPlayer;
+        }
+        return false;
+    }
+
+    containsFoe(row: number, col: number) {
+        return this.squareContainsFoe(Square.at(row, col));
+    }
+
+    squareContainsOpposingKing(square: Square) {
+        const piece = this.getPiece(square);
+        if (!(typeof piece === "undefined")) {
+            if(piece.constructor.name === "King") {
+                return piece.player !== this.currentPlayer;
+            }
+        }
+        return false;
+    }
+
+    containsOpposingKing(row: number, col: number) {
+        return this.squareContainsOpposingKing(Square.at(row, col));
     }
 
     findPiece(pieceToFind: Piece) {
@@ -44,7 +86,7 @@ export default class Board {
     }
 
     movePiece(fromSquare: Square, toSquare: Square) {
-        const movingPiece = this.getPiece(fromSquare);        
+        const movingPiece = this.getPiece(fromSquare);
         if (!!movingPiece && movingPiece.player === this.currentPlayer) {
             this.setPiece(toSquare, movingPiece);
             this.setPiece(fromSquare, undefined);

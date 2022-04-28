@@ -29,52 +29,131 @@ export class PieceStatus {
         this.currentCol = currentSquare.col;
     }
 
-    addSquareToMoveList(rowIndex : number, colIndex : number) {
+    addSquareToMoveList(rowIndex: number, colIndex: number) {
         this.availableSquares.push(Square.at(rowIndex, colIndex));
     }
 
-    returnExistingSquaresFromListOfCoordinates(squareList : number[][], max : number) {
-        return squareList.filter(square => square.every(position => position >=0 && position < max));
+    returnExistingSquaresFromListOfCoordinates(squareList: number[][], max: number) {
+        return squareList.filter(square => square.every(position => position >= 0 && position < max));
     }
 }
 
 export class Movement {
     board: Board;
     status: PieceStatus;
+
     constructor(board: Board, status: PieceStatus) {
         this.status = status;
         this.board = board;
     }
+
     addDiagonalMoves() {
-        let x = this.status.currentCol;
-        let y = this.status.currentRow;
-        let maxAddRow = GameSettings.BOARD_SIZE - y;
-        let maxAddCol = GameSettings.BOARD_SIZE - x;
-        for (let i = 1; i < Math.max(x, y, maxAddRow, maxAddCol); i++) {
-            if (x - i >= 0 && y - i >= 0) {
-                this.status.addSquareToMoveList(y - i, x - i);
-            }
-            if (x + i < GameSettings.BOARD_SIZE && y + i < GameSettings.BOARD_SIZE) {
-                this.status.addSquareToMoveList(y + i, x + i);
-            }
-            if (x + i < GameSettings.BOARD_SIZE && y - i >= 0) {
-                this.status.addSquareToMoveList(y - i, x + i);
-            }
-            if (x - i >= 0 && y + i < GameSettings.BOARD_SIZE) {
-                this.status.addSquareToMoveList(y + i, x - i);
-            }
+        let currentCol = this.status.currentCol;
+        let currentRow = this.status.currentRow;
+        this.availableMovesNE(currentRow, currentCol);
+        this.availableMovesSE(currentRow, currentCol);
+        this.availableMovesNW(currentRow, currentCol);
+        this.availableMovesSW(currentRow, currentCol);
+    }
+
+    addLateralMoves() {
+        let currentRow = this.status.currentRow;
+        let currentCol = this.status.currentCol;
+        this.availableMovesN(currentRow, currentCol);
+        this.availableMovesS(currentRow, currentCol);
+        this.availableMovesE(currentRow, currentCol);
+        this.availableMovesW(currentRow, currentCol);
+    }
+
+
+    //Lateral move checkers
+    availableMovesN(currentRow: number, currentCol: number) {
+        for (let y = currentRow + 1; y < GameSettings.BOARD_SIZE && this.spaceValid(y, currentCol, "N"); y++) {
+            this.status.addSquareToMoveList(y, currentCol);
         }
     }
 
 
-    addLateralMoves() {
-        for (let i = 0; i < GameSettings.BOARD_SIZE; i++) {
-            if (i !== this.status.currentCol) {
-                this.status.addSquareToMoveList(this.status.currentRow, i);
-            }
-            if (i !== this.status.currentRow) {
-                this.status.addSquareToMoveList(i, this.status.currentCol);
-            }
+    availableMovesS(currentRow: number, currentCol: number) {
+        for (let y = currentRow - 1; y >= 0 && this.spaceValid(y, currentCol,"S"); y--) {
+            this.status.addSquareToMoveList(y, currentCol);
         }
+    }
+
+    availableMovesE(currentRow: number, currentCol: number) {
+        for (let x = currentCol + 1; x < GameSettings.BOARD_SIZE && this.spaceValid(currentRow, x, "E"); x++) {
+            this.status.addSquareToMoveList(currentRow, x);
+        }
+    }
+
+    availableMovesW(currentRow: number, currentCol: number) {
+        for (let x = currentCol - 1; x >= 0 && this.spaceValid(currentRow, x, "W"); x--) {
+            this.status.addSquareToMoveList(currentRow, x);
+        }
+    }
+
+
+    //Diagonal move checkers
+    availableMovesNE(currentRow: number, currentCol: number) {
+        for (let row = currentRow + 1, col = currentCol + 1; Math.max(col, row) < GameSettings.BOARD_SIZE && this.spaceValid(row, col,"NE"); row++, col++) {
+            this.status.addSquareToMoveList(row, col);
+        }
+    }
+
+    availableMovesSE(currentRow: number, currentCol: number) {
+        for (let row = currentRow - 1, col = currentCol + 1; col < GameSettings.BOARD_SIZE && row >= 0 && this.spaceValid(row, col,"SE"); row--, col++) {
+            this.status.addSquareToMoveList(row, col);
+        }
+    }
+
+    availableMovesSW(currentRow: number, currentCol: number) {
+        for (let row = currentRow - 1, col = currentCol - 1; Math.min(col, row) >= 0 && this.spaceValid(row, col,"SW"); row--, col--) {
+            this.status.addSquareToMoveList(row, col);
+        }
+    }
+
+    availableMovesNW(currentRow: number, currentCol: number) {
+        for (let row = currentRow + 1, col = currentCol - 1; row < GameSettings.BOARD_SIZE && col >= 0 && this.spaceValid(row, col,"NW"); row++, col--) {
+            this.status.addSquareToMoveList(row, col);
+        }
+    }
+
+
+
+    spaceValid(row: number, col: number, direction: string) {
+        let alteredRow = row;
+        let alteredCol = col;
+        switch (direction) {
+            case "N":
+                alteredRow = row - 1;
+                break;
+            case "S":
+                alteredRow = row + 1;
+                break;
+            case "E":
+                alteredCol = col - 1;
+                break;
+            case "W":
+                alteredCol = col + 1;
+                break;
+            case "NE":
+                alteredRow = row - 1;
+                alteredCol = col - 1;
+                break;
+            case "SE":
+                alteredRow = row + 1;
+                alteredCol = col - 1;
+                break;
+            case "NW":
+                alteredRow = row - 1;
+                alteredCol = col + 1;
+                break;
+            case "SW":
+                alteredRow = row + 1;
+                alteredCol = col + 1;
+                break;
+        }
+        return !this.board.containsFriend(row, col) && !this.board.containsFoe(alteredRow, alteredCol) && !this.board.containsOpposingKing(row, col);
+        // Space is valid if current piece is not a friend or if the previous piece was not a foe
     }
 }
